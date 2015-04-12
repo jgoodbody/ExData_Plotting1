@@ -12,8 +12,10 @@ data2 <- subset(data, data$Date >= as.Date("2007-02-01"))
 data3 <- subset(data2, data2$Date <= as.Date("2007-02-02"))
 
 ##Create PNG file and line graph
-##I could not figure out how to give different colors to the graphs
 png(file="plot3.png")
-plot(x=c(data3$Time,data3$Time,data3$Time),y=c(as.numeric(as.character(data3$Sub_metering_1)),as.numeric(as.character(data3$Sub_metering_2)),as.numeric(as.character(data3$Sub_metering_3))),type="l",xlab="",ylab="Energy sub metering")
-legend("topright",pch="-",col = c(1,1,1),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+plot(x=data3$Time,y=as.numeric(as.character(data3$Sub_metering_1)),type="n",xlab="",ylab="Energy sub metering")
+lines(data3$Time,as.numeric(as.character(data3$Sub_metering_1)),col="black")
+lines(data3$Time,as.numeric(as.character(data3$Sub_metering_2)),col="red")
+lines(data3$Time,as.numeric(as.character(data3$Sub_metering_3)),col="blue")
+legend("topright",lty=1,col = c(1,2,4),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 dev.off()
